@@ -307,7 +307,7 @@ tostring(#tref{i=I}) -> iolist_to_binary(["table: ",io_lib:write(I)]);
 tostring(#function{}) -> <<"function:">>;	%Functions defined in Lua
 tostring({function,_}) -> <<"function:">>;	%Internal functions
 tostring(#thread{}) -> <<"thread">>;
-tostring(#userdata{}) -> <<"userdata">>;
+tostring(#uref{i=I}) -> iolist_to_binary(["userdata: ",io_lib:write(I)]);
 tostring(_) -> <<"unknown">>.
 
 type([Arg|_], St) -> {[type(Arg)],St}.		%Only one return value!
@@ -320,7 +320,7 @@ type(#tref{}) -> <<"table">>;
 type(#function{}) -> <<"function">>;		%Functions defined in Lua
 type({function,_}) -> <<"function">>;		%Internal functions
 type(#thread{}) -> <<"thread">>;
-type(#userdata{}) -> <<"userdata">>;
+type(#uref{}) -> <<"userdata">>;
 type(_) -> <<"unknown">>.
 
 %% getmetatable([Value|_], State) -> {Table,State}.
